@@ -8,7 +8,7 @@
 ### RELATIONS
 1. User has many tasks and has many subtasks through task.
 2. Task belongs to user and has many subtasks.
-3. Subtask belongs to task.
+3. Subtask belongs to task and belongs to user through task.
 
 ### FEATURES
 1. Users can create an account.
