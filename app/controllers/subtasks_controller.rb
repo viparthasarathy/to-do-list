@@ -10,7 +10,21 @@ class SubtasksController < ApplicationController
   delete '/subtasks/:id/delete' do
     subtask = Subtask.find(params[:id])
     task_id = subtask.task_id
-    subtask.delete if logged_in? && subtask.user == current_user
+    subtask.delete if subtask.user == current_user
+    redirect to "/tasks/#{task_id}"
+  end
+
+  post '/subtasks/:id/completed' do
+    subtask = Subtask.find(params[:id])
+    task_id = subtask.task_id
+    subtask.update(completed: true) if subtask.user == current_user
+    redirect to "/tasks/#{task_id}"
+  end
+
+  post '/subtasks/:id/uncompleted' do
+    subtask = Subtask.find(params[:id])
+    task_id = subtask.task_id
+    subtask.update(completed: false) if subtask.user == current_user
     redirect to "/tasks/#{task_id}"
   end
 

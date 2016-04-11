@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
   get '/tasks/:id' do
     @task = Task.find(params[:id])
-    if logged_in? && current_user == @task.user
+    if current_user == @task.user
       erb :'/tasks/show'
     else
       redirect to '/home'
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
 
   get '/tasks/:id/edit' do
     @task = Task.find(params[:id])
-    if logged_in? && current_user == @task.user
+    if current_user == @task.user
       erb :'/tasks/edit'
     else
       redirect to '/home'
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
 
   patch '/tasks/:id' do
     task = Task.find(params[:id])
-    if logged_in? && current_user == task.user
+    if current_user == task.user
       task.update(taskname: params[:taskname])
       redirect to "/tasks/#{task.id}"
     else
@@ -58,11 +58,26 @@ class TasksController < ApplicationController
 
   delete '/tasks/:id/delete' do
     task = Task.find(params[:id])
-    if logged_in? && current_user == task.user
+    if current_user == task.user
       task.subtasks.delete
       task.delete
     end
     redirect to '/home'
+  end
+
+  post '/tasks/:id/completed' do
+    task = Task.find(params[:id])
+    if current_user == task.user
+      task.update(completed: true)
+      task.subtasks.each {|subtask| subtask.update(completed: true)}
+    end
+    redirect to '/home'
+  end
+
+  post '/tasks/:id/uncompleted' do
+    task = Task.find(params[:id])
+    task.update(completed: false) if current_user == task.user
+    redirect to "/tasks/#{task.id}"
   end
 
 end
