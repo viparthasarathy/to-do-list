@@ -1,1 +1,9 @@
-<h1>HELLO <%=current_user.username%></h1>
+<h1>Welcome to your task page, <%=current_user.username%></h1>
+
+<% @tasks.each do |task| %>
+
+  <h2><a href="/tasks/<%=task.id%>"><%=task.taskname%></a></h2>
+
+<% end %>
+
+<h3><a href="/tasks/new">Click here to create a new task.</a></h3>

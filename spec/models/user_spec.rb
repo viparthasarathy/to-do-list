@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'User' do
   before do
     @user = User.create(username: "Bobby Jims", password: "itsbobby")
-    @task = Task.create(taskname: "Cook Dinner")
+    @task = Task.create(taskname: "Cook Dinner", user: @user)
     @user.tasks << @task
-    @user.tasks << Task.create(taskname: "Pick up Bobby Jr.")
-    @task.subtasks << Subtask.create(details: "Pick up groceries.")
-    @task.subtasks << Subtask.create(details: "Cook.")
+    @user.tasks << Task.create(taskname: "Pick up Bobby Jr.", user: @user)
+    @task.subtasks << Subtask.create(details: "Pick up groceries.", task: @task)
+    @task.subtasks << Subtask.create(details: "Cook.", task: @task)
   end
 
   it 'can be initialized' do

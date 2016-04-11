@@ -1,0 +1,8 @@
+<h1> <%= @task.taskname %> </h2>
+
+  <h3> Subtasks </h3>
+  <% @task.subtasks.each do |subtask| %>
+    <h4><%= subtask.details %></h4>
+  <% end %>
+
+  

@@ -3,12 +3,12 @@ require 'spec_helper'
 describe "Subtask" do
   before do
     @user = User.create(username: "Bobby Jims", password: "itsbobby")
-    @task = Task.create(taskname: "Cook Dinner")
-    @subtask = Subtask.create(details: "Pick up groceries.")
+    @task = Task.create(taskname: "Cook Dinner", user: @user)
+    @subtask = Subtask.create(details: "Pick up groceries.", task: @task)
     @user.tasks << @task
-    @user.tasks << Task.create(taskname: "Pick up Bobby Jr.")
+    @user.tasks << Task.create(taskname: "Pick up Bobby Jr.", user: @user)
     @task.subtasks << @subtask
-    @task.subtasks << Subtask.create(details: "Cook.")
+    @task.subtasks << Subtask.create(details: "Cook.", task: @task)
   end
 
   it 'can initialized' do
