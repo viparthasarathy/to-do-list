@@ -1,4 +1,4 @@
-# TO DO LIST - IN PROGRESS
+# TO DO LIST
 
 ### MODELS
 1. User
@@ -13,3 +13,4 @@
 ### FEATURES
 1. Users can create an account.
 2. Users can perform CRUD functions on tasks and subtasks.
+3. Users can mark tasks and subtasks as complete.
