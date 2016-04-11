@@ -7,10 +7,12 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "todolist"
+    register Sinatra::Flash
   end
 
   get '/' do
     if logged_in?
+      flash[:success] = "Welcome back."
       redirect to '/home'
     else
       redirect to '/login'

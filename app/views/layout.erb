@@ -5,9 +5,8 @@
 </head>
 
 <body>
-  <% unless locals.empty? %>
-    <%= message %>
-  <% end %>
+  <%= flash[:error] if flash[:error] %>
+  <%= flash[:success] if flash[:success] %>
   <%= yield %>
 </body>
 </html>
