@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    redirect to '/login'
+    if logged_in?
+      redirect to '/home'
+    else
+      redirect to '/login'
+    end
   end
 
   helpers do

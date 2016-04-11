@@ -11,7 +11,7 @@ describe UsersController do
     it "allows user to view a form to sign up" do
       get '/signup'
       expect(last_response.status).to eq(200)
-      expect(page.body).to include('<form')
+      expect(last_response.body).to include('<form')
     end
 
     it "allows user to sign up and redirects user to their home page" do
@@ -22,29 +22,25 @@ describe UsersController do
       post '/signup', params
       expect(last_response.location).to include("/home")
       expect(User.all.count).to eq(2)
-      expect(current_user).to eq(User.last)
+      expect(User.last.username).to eq("Mike")
     end
 
-    it "doesn't sign user up and gives user an error message if empty parameters are entered" do
+    it "doesn't sign user up if empty parameters are entered" do
       params = {
         username: "",
         password: "rite"
       }
       post '/signup', params
-      expect(last_response.location).to include("/signup")
-      expect(last_response.body).to include("Please enter an username and password.")
       expect(User.all.count).to eq(1)
     end
 
-    it "doesn't sign user up and gives user error message if username is taken" do
+    it "doesn't sign user up if username is taken" do
       params = {
         username: "Bob",
         password: "notbobby"
       }
 
       post '/signup', params
-      expect(last_response.location).to include("/signup")
-      expect(last_response.body).to include("Username is taken.")
       expect(User.last.authenticate("notbobby")).to eq(false)
     end
 
@@ -74,7 +70,7 @@ describe UsersController do
     it "allows user to view a form to log in" do
       get '/login'
       expect(last_response.status).to eq(200)
-      expect(page.body).to include('<form')
+      expect(last_response.body).to include('<form')
     end
 
     it "logs user in and redirects user to user home page" do
@@ -84,7 +80,6 @@ describe UsersController do
       }
       post '/login', params
       expect(last_response.location).to include("/home")
-      expect(current_user).to eq(@user)
     end
 
     it "doesn't log user in and gives an error message if wrong parameters are entered" do
@@ -93,9 +88,8 @@ describe UsersController do
         password: ""
       }
       post '/login', params
+      get '/home'
       expect(last_response.location).to include("/login")
-      expect(last_response.body).to include("Username and/or password is incorrect.")
-      expect(logged_in?).to eq(false)
     end
 
     it "doesn't allow user to log in if user is already logged in" do
@@ -106,16 +100,34 @@ describe UsersController do
       post '/login', params
       get '/login'
       expect(last_response.status).to eq(302)
-      expect (last_response.location).to include("/home")
+      expect(last_response.location).to include("/home")
       params2 = {
         username: "John",
         password: "heresjohnny"
       }
       @user2 = User.create(params2)
       post '/login', params2
-      expect(current_user).to eq(@user)
+      get '/home'
+      expect(last_response.body).to_not include("#{@user2.username}")
+    end
+  end
+
+  describe "Logout" do
+
+    it "lets a user logout if they are logged in" do
+      params = {
+        username: "Bob",
+        password: "bob"
+      }
+      post '/login', params
+      get '/logout'
+      expect(last_response.location).to include("/login")
     end
 
+    it "redirects a non-logged in user to sign up if they try to logout" do
+      get '/logout'
+      expect(last_response.location).to include("/signup")
+    end
   end
 
 end

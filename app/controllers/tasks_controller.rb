@@ -1,5 +1,11 @@
 class TasksController < ApplicationController
 
   get '/home' do
-    erb :'/tasks/index'
+    if logged_in?
+      erb :'/tasks/index'
+    else
+      redirect to '/login'
+    end
   end
+
+end
