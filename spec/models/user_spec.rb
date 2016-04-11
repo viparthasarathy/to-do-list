@@ -30,4 +30,10 @@ describe 'User' do
   it 'has many subtasks' do
     expect(@user.subtasks.count).to eq(2)
   end
+
+  it 'has a unique username' do
+    @user2 = User.new(username: "Bobby Jims", password: "itsnotbobby")
+    expect(@user2.save).to eq(false)
+  end
+
 end

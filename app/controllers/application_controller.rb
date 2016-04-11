@@ -10,9 +10,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "Hello World!"
+    redirect to '/login'
   end
-  
+
   helpers do
 
     def logged_in?
@@ -20,7 +20,8 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
+      User.find_by_id(session[:user_id])
     end
-
   end
+
 end

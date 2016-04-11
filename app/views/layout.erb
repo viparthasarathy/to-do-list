@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+</head>
+
+<body>
+  <% unless locals.empty? %>
+    <%= message %>
+  <% end %>
+  <%= yield %>
+</body>
+</html>
