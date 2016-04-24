@@ -1,10 +1,29 @@
-<h1> Login! </h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-5">
+    <h1>Login</h1>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form method="post" action="/login" class="form-inline">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control">
+      </div>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+  </div>
+</div>
 
-<form method="post" action="/login">
-
-  <label>Username: <input type="text" name="username"></label>
-  <label>Password: <input type="password" name="password"></label>
-  <input type="submit" value="submit">
-</form>
-
-<h4>No account? <a href="/signup">Click here to sign up.</a></h4>
+<div class="row">
+  <div class="col-md-6 col-md-offset-4">
+    <h4>No account? <a href="/signup">Click here to sign up.</a></h4>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <a href="/logout">Log Out</a>
+    </div>
+  <h1>Welcome to your task page, <%=current_user.username%></h1>
+  </div>
+
+
+  <% @tasks.each do |task| %>
+  <div class="row">
+    <h1> <%= task.taskname %> <%= "- Completed" if task.completed %> </h1>
+    <form method="post" action="/tasks/<%=task.id%>/delete">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger btn-sm">
+        <i class="glyphicon glyphicon-remove"></i>
+      </button>
+    </form>
+      <% if task.completed %>
+        <form method="post" action="/tasks/<%=task.id%>/uncompleted">
+          <button type="submit" class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-star"></i>
+          </button>
+        </form>
+      <% else %>
+        <form method="post" action="/tasks/<%=task.id%>/completed">
+          <button type="submit" class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-star-empty"></i>
+          </button>
+        </form>
+      <% end %>
+
+      <form method="post" action="/tasks/<%=task.id%>">
+        <input type="hidden" id="hidden" name="_method" value="patch">
+        <label>Change your name: <input type="text" value="<%=task.taskname%>" name="taskname"> </label>
+        <input type="submit" value="submit">
+      </form>
+
+
+
+      <h3> Subtasks </h3>
+      <% task.subtasks.each do |subtask| %>
+        <h4><%= subtask.details%> <%="- Completed" if subtask.completed %></h4>
+        <form method="post" action="/subtasks/<%=subtask.id%>/delete">
+          <input type="hidden" id="hidden" name="_method" value="delete">
+          <button type="submit" class="btn btn-danger btn-sm">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </form>
+        <% if subtask.completed %>
+          <form method="post" action="/subtasks/<%=subtask.id%>/uncompleted">
+            <button type="submit" class="btn btn-success btn-sm">
+              <i class="glyphicon glyphicon-star"></i>
+            </button>
+          </form>
+        <% else %>
+          <form method="post" action="/subtasks/<%=subtask.id%>/completed">
+            <button type="submit" class="btn btn-success btn-sm">
+              <i class="glyphicon glyphicon-star-empty"></i>
+            </button>
+          </form>
+        <% end %>
+      <% end %>
+
+      <h3> Create a new subtask! </h3>
+
+      <form method="post" action="/subtasks">
+        <input type="hidden" name="task_id" value="<%=task.id%>">
+        <input type="text" name="subtask[details]">
+        <input type="submit" value="Create New Subtask">
+      </form>
+  </div>
+  <% end %>
+  <div class="row">
+  <h1>Create a new task!</h1>
+  <form method="post" action="/tasks">
+
+    <label>Task: <input type="text" name="task[taskname]"></label>
+
+    <label>Subtask: <input type="text" name="subtask[][details]"></label>
+    <label>Subtask: <input type="text" name="subtask[][details]"></label>
+    <label>Subtask: <input type="text" name="subtask[][details]"></label>
+
+    <input type="submit" type="submit">
+
+  </form>
+  </div>

@@ -27,4 +27,10 @@ class UsersController < ApplicationController
     sign_up(params)
   end
 
+  get '/home' do
+    redirect_if_logged_out
+    @tasks = current_user.tasks
+    erb :'/users/home'
+  end
+
 end

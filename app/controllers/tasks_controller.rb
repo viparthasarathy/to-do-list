@@ -1,11 +1,5 @@
 class TasksController < ApplicationController
 
-  get '/home' do
-    redirect_if_logged_out
-    @tasks = current_user.tasks
-    erb :'/tasks/index'
-  end
-
   post '/tasks' do
     task = Task.new(params[:task])
     if task.save
