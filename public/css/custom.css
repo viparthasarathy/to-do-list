@@ -1,0 +1,59 @@
+/* universal */
+
+html {
+	overflow-y: scroll;
+}
+
+body {
+	padding-top: 60px;
+}
+
+section {
+	overflow: auto;
+}
+
+textarea {
+	resize: vertical;
+}
+
+.center {
+	text-align: center;
+}
+
+.center h1 {
+	margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h4 {
+	margin-top: 15px;
+	text-align: center;
+}
+
+header p, header p a {
+	margin-right: 10px;
+	color: #31ADD6;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+header {
+	height: 50px;
+}
+
+.login:hover, .signup:hover, a:hover, a:active {
+	color: white;
+	text-decoration: none;
+}

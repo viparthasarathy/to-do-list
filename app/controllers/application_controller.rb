@@ -9,15 +9,6 @@ class ApplicationController < Sinatra::Base
     register Sinatra::Flash
   end
 
-  get '/' do
-    if logged_in?
-      flash[:success] = "Welcome back."
-      redirect to '/home'
-    else
-      redirect to '/login'
-    end
-  end
-
   helpers do
 
     def logged_in?
@@ -40,7 +31,7 @@ class ApplicationController < Sinatra::Base
         redirect to '/home'
       else
         flash[:error] = "Incorrect username and/or password."
-        redirect to '/login'
+        redirect to '/'
       end
     end
 
@@ -52,10 +43,10 @@ class ApplicationController < Sinatra::Base
         redirect to '/home'
       elsif (user_details[:username] == "" || user_details[:password] == "")
         flash[:error] = "Please enter a username and password."
-        redirect to '/signup'
+        redirect to '/'
       else
         flash[:error] = "Username is taken."
-        redirect to '/signup'
+        redirect to '/'
       end
     end
 
@@ -69,7 +60,7 @@ class ApplicationController < Sinatra::Base
     def redirect_if_logged_out
       if !logged_in?
         flash[:error] = "Not logged in."
-        redirect to '/login'
+        redirect to '/'
       end
     end
 

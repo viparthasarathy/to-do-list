@@ -1,0 +1,20 @@
+
+<header class="nvbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <li> <p><%=current_user.username%></p> </li>
+          <li> <p><a href="/logout">Log Out</a></p> </li>
+        <% else %>
+          <li> <p class="login">Log In</p></li>
+          <li> <p class="signup">Sign Up</p></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-left">
+        <li> <p>To-Do List Application</p> </li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
