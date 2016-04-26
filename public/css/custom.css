@@ -57,3 +57,11 @@ header {
 	color: white;
 	text-decoration: none;
 }
+
+.edit_form {
+	display: none;
+}
+
+.add_subtask_form {
+	display: none;
+}

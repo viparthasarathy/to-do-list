@@ -12,8 +12,14 @@
 <body>
   <%= erb :navbar %>
   <!-- Error/Success Messages -->
-  <%= flash[:error] if flash[:error] %>
-  <%= flash[:success] if flash[:success] %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h4><%= flash[:error] if flash[:error] %></h4>
+        <h4><%= flash[:success] if flash[:success] %></h4>
+      </div>
+    </div>
+  </div>
   <!-- JS -->
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>

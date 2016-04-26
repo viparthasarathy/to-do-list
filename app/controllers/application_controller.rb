@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(username: user_details[:username])
       if user && user.authenticate(user_details[:password])
         session[:user_id] = user.id
-        flash[:success] = "Welcome."
+        flash[:success] = "Welcome back."
         redirect to '/home'
       else
         flash[:error] = "Incorrect username and/or password."
