@@ -41,10 +41,6 @@ h4 {
 	margin-top: 15px;
 }
 
-p {
-	font-style: italic;
-}
-
 header p, header p a {
 	margin-right: 10px;
 	color: #31ADD6;
@@ -79,4 +75,9 @@ header {
 
 .btn-sm {
 	padding: 5px 10px;
+}
+
+.group {
+	text-align:center;
+  margin:auto;
 }

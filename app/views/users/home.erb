@@ -18,83 +18,88 @@
   <% end %>
 
   <% @tasks.each do |task| %>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <h3> <%= task.taskname %> <%= "- Completed" if task.completed %>
+    <h3><%= task.taskname %> <%= "- Completed" if task.completed %></h3>
+    <div class="group">
     <form method="post" action="/tasks/<%=task.id%>/delete"  class="button">
-      <input type="hidden" id="hidden" name="_method" value="delete">
-      <button type="submit" class="btn btn-danger btn-sm">
-        <i class="glyphicon glyphicon-remove"></i>
-      </button>
-    </form>
-      <% if task.completed %>
-        <form method="post" action="/tasks/<%=task.id%>/uncompleted" class="button">
-          <button type="submit" class="btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-star"></i>
-          </button>
-        </form>
-      <% else %>
-        <form method="post" action="/tasks/<%=task.id%>/completed" class="button">
-          <button type="submit" class="btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-star-empty"></i>
-          </button>
-        </form>
-      <% end %>
-      <button class="btn btn-warning btn-sm edit button">
-        <i class="glyphicon glyphicon-pencil"></i>
-      </button>
-      <form method="post" action="/tasks/<%=task.id%>" class="edit_form">
+       <input type="hidden" id="hidden" name="_method" value="delete">
+       <button type="submit" class="btn btn-danger btn-sm">
+         <i class="glyphicon glyphicon-remove"></i>
+       </button>
+     </form>
+       <% if task.completed %>
+         <form method="post" action="/tasks/<%=task.id%>/uncompleted" class="button">
+           <button type="submit" class="btn btn-success btn-sm">
+             <i class="glyphicon glyphicon-star"></i>
+           </button>
+         </form>
+       <% else %>
+         <form method="post" action="/tasks/<%=task.id%>/completed" class="button">
+           <button type="submit" class="btn btn-success btn-sm">
+             <i class="glyphicon glyphicon-star-empty"></i>
+           </button>
+         </form>
+       <% end %>
+       <button class="btn btn-warning btn-sm edit button">
+         <i class="glyphicon glyphicon-pencil"></i>
+       </button>
 
-        <input type="hidden" id="hidden" name="_method" value="patch">
-        <label>Edit task name: <input type="text" value="<%=task.taskname%>" name="taskname"> </label>
-        <input type="submit" value="submit">
-      </form>
+       <button class="btn btn-sm btn-primary add_subtask"> <i class="glyphicon glyphicon-plus"></i> </button>
+           <form method="post" action="/subtasks" class="add_subtask_form">
+             <input type="hidden" name="task_id" value="<%=task.id%>">
+             <input type="text" name="subtask[details]">
+             <input type="submit" value="Create New Subtask">
+           </form>
 
-      </h3>
+     <form method="post" action="/tasks/<%=task.id%>" class="edit_form">
+
+       <input type="hidden" id="hidden" name="_method" value="patch">
+       <input type="text" value="<%=task.taskname%>" name="taskname">
+       <input type="submit" value="Edit Task Name">
+     </form>
+   </div>
 
 
-
-    <div class="row">
-      <h4> Subtasks
-      <button class="btn btn-sm btn-primary add_subtask">
-        <i class="glyphicon glyphicon-plus"></i>
-      </button>
-      <form method="post" action="/subtasks" class="add_subtask_form">
-        <input type="hidden" name="task_id" value="<%=task.id%>">
-        <input type="text" name="subtask[details]">
-        <input type="submit" value="Create New Subtask">
-      </form>
-    </div>
-      </h4>
-
-      <div class="row">
-      <% task.subtasks.each do |subtask| %>
-        <h5><%= subtask.details%> <%="- Completed" if subtask.completed %>
-        <form method="post" action="/subtasks/<%=subtask.id%>/delete" class="button">
-          <input type="hidden" id="hidden" name="_method" value="delete">
-          <button type="submit" class="btn btn-danger btn-sm">
-            <i class="glyphicon glyphicon-remove"></i>
-          </button>
-        </form>
-        <% if subtask.completed %>
-          <form method="post" action="/subtasks/<%=subtask.id%>/uncompleted" class="button">
-            <button type="submit" class="btn btn-success btn-sm">
-              <i class="glyphicon glyphicon-star"></i>
+    <table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>#</th>
+          <th>Subtask
+          </th>
+          <th>Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% task.subtasks.each_with_index do |subtask, index| %>
+      <tr>
+         <th scope="row"><%= index + 1%></th>
+         <td><%= subtask.details%> <%="- Completed" if subtask.completed %></td>
+         <td>
+          <form method="post" action="/subtasks/<%=subtask.id%>/delete" class="button">
+            <input type="hidden" id="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger btn-sm">
+              <i class="glyphicon glyphicon-remove"></i>
             </button>
           </form>
-        <% else %>
-          <form method="post" action="/subtasks/<%=subtask.id%>/completed" class="button">
-            <button type="submit" class="btn btn-success btn-sm">
-              <i class="glyphicon glyphicon-star-empty"></i>
-            </button>
-          </form>
-        <% end %>
-        </h5>
-      <% end %>
-    </div>
-        </div>
+          <% if subtask.completed %>
+            <form method="post" action="/subtasks/<%=subtask.id%>/uncompleted" class="button">
+              <button type="submit" class="btn btn-success btn-sm">
+                <i class="glyphicon glyphicon-star"></i>
+              </button>
+            </form>
+          <% else %>
+            <form method="post" action="/subtasks/<%=subtask.id%>/completed" class="button">
+              <button type="submit" class="btn btn-success btn-sm">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </button>
+            </form>
+          <% end %>
+        </td>
+      </tr>
 
-  </div>
+
+      <% end %>
+      </table>
   <% end %>
 
   <script src="/js/home.js"></script>
