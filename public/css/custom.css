@@ -26,20 +26,23 @@ textarea {
 
 /* typography */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
+	text-align: center;
 }
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
 }
 
 h4 {
 	margin-top: 15px;
-	text-align: center;
+}
+
+p {
+	font-style: italic;
 }
 
 header p, header p a {
@@ -64,4 +67,16 @@ header {
 
 .add_subtask_form {
 	display: none;
+}
+
+.button {
+	display: inline-block;
+}
+
+.glyphicon {
+	font-size: 10px;
+}
+
+.btn-sm {
+	padding: 5px 10px;
 }

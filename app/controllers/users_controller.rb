@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   get '/home' do
     redirect_if_logged_out
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.reverse
     erb :'/users/home'
   end
 
