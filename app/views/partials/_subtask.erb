@@ -1,0 +1,25 @@
+<tr>
+ <th scope="row" class="col-md-3"><%= index + 1%></th>
+ <td class="col-md-6"><div class="<%= 'complete' if subtask.completed%>"><%= subtask.details%></div></td>
+ <td "col-md-6">
+   <% if subtask.completed %>
+     <form method="post" action="/subtasks/<%=subtask.id%>/uncompleted" class="button">
+       <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-star"></i></button>
+     </form>
+   <% else %>
+     <form method="post" action="/subtasks/<%=subtask.id%>/completed" class="button">
+       <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-star-empty"></i></button>
+     </form>
+   <% end %>
+   <button class="btn btn-warning btn-sm edit button"><i class="glyphicon glyphicon-pencil"></i></button>
+   <form method="post" action="/subtasks/<%=subtask.id%>/delete" class="button">
+     <input type="hidden" id="hidden" name="_method" value="delete">
+     <button type="submit" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></button>
+   </form>
+   <form method="post" action="/subtasks/<%=subtask.id%>" class="edit_form">
+     <input type="hidden" id="hidden" name="_method" value="patch">
+     <input type="text" value="<%=subtask.details%>" name="details">
+     <input type="submit" value="Edit Subtask Details" class="btn btn-warning btn-sm">
+   </form>
+ </td>
+</tr>

@@ -12,6 +12,12 @@ class SubtasksController < ApplicationController
     redirect to '/home'
   end
 
+  patch '/subtasks/:id' do
+    subtask = current_user.subtasks.find(params[:id])
+    flash[:success] = subtask.update(details: params[:details]) ? "Subtask successfully edited." : "Please enter valid details."
+    redirect to '/home'
+  end
+
   delete '/subtasks/:id/delete' do
     subtask = current_user.subtasks.find(params[:id])
     subtask.delete

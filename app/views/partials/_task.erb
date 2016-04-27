@@ -1,0 +1,30 @@
+<h3 class="<%= 'complete' if task.completed%>"><%= task.taskname %></h3>
+<div class="group">
+  <button class="btn btn-sm btn-primary add_subtask"> <i class="glyphicon glyphicon-plus"></i> </button>
+  <% if task.completed %>
+    <form method="post" action="/tasks/<%=task.id%>/uncompleted" class="button">
+      <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-star"></i></button>
+    </form>
+  <% else %>
+    <form method="post" action="/tasks/<%=task.id%>/completed" class="button">
+      <button type="submit" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-star-empty"></i></button>
+    </form>
+  <% end %>
+  <button class="btn btn-warning btn-sm edit button"> <i class="glyphicon glyphicon-pencil"></i> </button>
+  <form method="post" action="/tasks/<%=task.id%>/delete"  class="button">
+   <input type="hidden" id="hidden" name="_method" value="delete">
+   <button type="submit" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></button>
+  </form>
+  <br></br>
+  <form method="post" action="/subtasks" class="add_subtask_form">
+    <input type="hidden" name="task_id" value="<%=task.id%>">
+    <input type="text" name="subtask[details]">
+    <input type="submit" value="Create New Subtask" class="btn btn-primary btn-sm">
+  </form>
+
+  <form method="post" action="/tasks/<%=task.id%>" class="edit_form">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <input type="text" value="<%=task.taskname%>" name="taskname">
+    <input type="submit" value="Edit Task Name" class="btn btn-warning btn-sm">
+  </form>
+</div>
