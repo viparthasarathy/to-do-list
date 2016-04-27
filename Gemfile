@@ -8,8 +8,6 @@ gem 'thin'
 gem 'bcrypt'
 gem 'require_all'
 gem 'sinatra-flash'
-gem 'pg'
-
 
 group :development do
   gem 'shotgun'
