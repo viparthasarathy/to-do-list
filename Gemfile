@@ -8,12 +8,14 @@ gem 'thin'
 gem 'bcrypt'
 gem 'require_all'
 gem 'sinatra-flash'
-gem 'sqlite3'
+gem 'pg'
+
 
 group :development do
   gem 'shotgun'
   gem 'pry'
   gem 'tux'
+  gem 'sqlite3'
 end
 
 group :test do
