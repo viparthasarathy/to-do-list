@@ -1,16 +1,20 @@
-# TO DO LIST
+# To-do List
+  This Sinatra application allows users to create to-do lists in order to keep track of daily tasks. Users can add steps to their tasks to clarify what needs to be done before reaching completion. The application requires users to create an account and log in before interacting with to-do lists. The back-end of this application utilizes Sinatra and ActiveRecord as the MVC framework and sqlite3 as the database. The front-end of this application utilizes the Bootstrap framework for styling purposes and JQuery in order to render and hide forms as needed.
+  
+## Installation 
+Clone this directory to your local environment and execute:
+```
+ $ bundle install
+```
 
-### MODELS
-1. User
-2. Task
-3. Subtask
+You should afterwards have access to the shotgun gem which will allow you to run the application on your local environment through the following command:
 
-### RELATIONS
-1. User has many tasks and has many subtasks through task.
-2. Task belongs to user and has many subtasks.
-3. Subtask belongs to task and belongs to user through task.
+```
+  bundle exec shotgun
+```
 
-### FEATURES
-1. Users can create an account.
-2. Users can perform CRUD functions on tasks and subtasks.
-3. Users can mark tasks and subtasks as complete.
+You should now be able to sign up, log in, and create to-do lists.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/viparthasarathy/to-do-list.
