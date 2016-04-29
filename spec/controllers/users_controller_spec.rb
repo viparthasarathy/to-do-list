@@ -8,12 +8,6 @@ describe UsersController do
 
   describe "Signup" do
 
-    it "allows user to view a form to sign up" do
-      get '/signup'
-      expect(last_response.status).to eq(200)
-      expect(last_response.body).to include('<form')
-    end
-
     it "allows user to sign up and redirects user to their home page" do
       params = {
         username: "Mike",
@@ -50,7 +44,7 @@ describe UsersController do
         password: "bob"
       }
       post '/login', params
-      get '/signup'
+      get '/'
       expect(last_response.status).to eq(302)
       expect(last_response.location).to include("/home")
       params = {
@@ -67,12 +61,6 @@ describe UsersController do
 
   describe "Login" do
 
-    it "allows user to view a form to log in" do
-      get '/login'
-      expect(last_response.status).to eq(200)
-      expect(last_response.body).to include('<form')
-    end
-
     it "logs user in and redirects user to user home page" do
       params = {
         username: "Bob",
@@ -82,23 +70,13 @@ describe UsersController do
       expect(last_response.location).to include("/home")
     end
 
-    it "doesn't log user in and gives an error message if wrong parameters are entered" do
-      params = {
-        username: "Bob",
-        password: ""
-      }
-      post '/login', params
-      get '/home'
-      expect(last_response.location).to include("/login")
-    end
-
     it "doesn't allow user to log in if user is already logged in" do
       params = {
         username: "Bob",
         password: "bob"
       }
       post '/login', params
-      get '/login'
+      get '/'
       expect(last_response.status).to eq(302)
       expect(last_response.location).to include("/home")
       params2 = {
@@ -121,12 +99,7 @@ describe UsersController do
       }
       post '/login', params
       get '/logout'
-      expect(last_response.location).to include("/login")
-    end
-
-    it "redirects a non-logged in user to sign up if they try to logout" do
-      get '/logout'
-      expect(last_response.location).to include("/signup")
+      expect(last_response.location).to include("/")
     end
   end
 
