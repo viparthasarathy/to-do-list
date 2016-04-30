@@ -1,0 +1,14 @@
+development:
+  adapter: sqlite3
+  database: development.db
+
+test:
+  adapter: sqlite3
+  database: test.db
+
+production:
+  adapter: postgresql
+  database: mission
+  username: username
+  password: password
+  host: localhost
