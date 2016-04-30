@@ -3,6 +3,8 @@ ENV['SINATRA_ENV'] ||= "development"
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
+set :public_folder, File.join(APP_ROOT, "public")
+
 configure :development do
   ActiveRecord::Base.establish_connection(
     adapter: "sqlite3",
