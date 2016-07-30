@@ -17,7 +17,7 @@ You should now be able to sign up, log in, and create to-do lists.
 
 ## Demo
 
-You can see a demo of this project [here](https://to-do-list-creator.herokuapp.com/) hosted via Heroku.
+You can see a demo of this project [here](https://to-do-list-creator.herokuapp.com/) hosted via Heroku. An example account is included -- just log in.
 
 ## Contributing
 
